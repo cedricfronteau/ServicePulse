@@ -99,7 +99,7 @@
                                         </tr>
                                     </table>
                                     <div class="alert alert-info" ng-show="row.panel === 2 && row.headersUnavailable">{{row.headersUnavailable}}</div>   
-                                    <pre ng-show="row.panel === 3 && row.messageBody">{{row.messageBody}}</pre>
+                                    <div ng-show="row.panel === 3 && row.messageBody" hljs source="row.messageBody"></div>
                                     <div class="alert alert-info" ng-show="row.panel === 3 && row.bodyUnavailable">{{row.bodyUnavailable}}</div> 
                                 </div>
                                 <div class="span4 text-right" title="In: {{row.receiving_endpoint.name}} on {{row.receiving_endpoint.host}}">in {{row.receiving_endpoint.name}} on {{row.receiving_endpoint.host}}</div>
