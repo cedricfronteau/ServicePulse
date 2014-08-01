@@ -4,7 +4,7 @@ angular.module('failedMessages', [])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/failedMessages', { templateUrl: 'js/failed_messages/failedMessages.tpl.html', controller: 'FailedMessagesCtrl' });
     }])
-    .controller('FailedMessagesCtrl', ['$scope', '$window', 'serviceControlService', 'streamService', '$routeParams', 'scConfig', function ($scope, $window, serviceControlService, streamService, $routeParams, scConfig) {
+    .controller('FailedMessagesCtrl', ['$scope', '$window', '$location', 'serviceControlService', 'streamService', '$routeParams', 'scConfig', function ($scope, $window, $location, serviceControlService, streamService, $routeParams, scConfig) {
 
         $scope.model = { total: 0, failedMessages: [], failedMessagesStats: [], selectedIds:[], newMessages: 0 };
         $scope.loadingData = false;
@@ -142,6 +142,13 @@ angular.module('failedMessages', [])
             }
 
             $window.open("si://" + dnsName + "?search=" + messageId);
+        };
+
+        $scope.viewConversation = function (row) {
+            serviceControlService.getMessageHeaders(row.message_id).then(function (message) {
+                var conversationId = message.data[0].conversation_id;
+                $location.path('/conversation/'+conversationId);
+            });
         };
 
         streamService.subscribe($scope, 'MessageFailed', function (event) {

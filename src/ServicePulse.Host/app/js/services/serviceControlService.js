@@ -172,5 +172,14 @@ angular.module('services.serviceControlService', [])
                         return results;
                     });
             };
+
+            this.getConversation = function (id, sortBy, page) {
+                return $http.get(scConfig.service_control_url + '/conversations/' + id + '?page=' + page + '&sort=' + sortBy).then(function (response) {
+                    return {
+                        data: response.data,
+                        total: response.headers('Total-Count')
+                    };
+                });
+            };
         }
     ]);

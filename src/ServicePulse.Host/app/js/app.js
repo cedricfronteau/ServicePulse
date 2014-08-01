@@ -20,7 +20,8 @@ angular.module('sc', [
     'customChecks',
     'configuration',
     'dashboard',
-    'hljs'
+    'hljs',
+    'conversation'
 ]);
 
 angular.module('sc')
